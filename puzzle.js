@@ -846,7 +846,7 @@ function fireKey(code, key) {
 
 const TOUCH_TIMING = {
     syntheticMouseGuardMs: 700,
-    holdDelayMs: 180,
+    holdDelayMs: 350,
     leftRightRepeatMs: 120,
     downRepeatMs: 80,
 };
