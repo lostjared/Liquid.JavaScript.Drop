@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="screen-orientation" content="landscape">
 <title>Liquid JavaScript Drop - WebGL 2.0</title>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -1583,9 +1582,6 @@ frame = function(timestamp) {
     }
     _origFrame(timestamp);
 };
-if (screen.orientation && screen.orientation.lock) {
-    screen.orientation.lock('landscape').catch(() => {});
-}
 requestAnimationFrame(frame);
 </script>
 </body>
