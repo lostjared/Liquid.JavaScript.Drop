@@ -70,10 +70,5 @@ You control a 3-block piece and try to make matches to clear blocks and score po
 
 ## Mobile notes
 
-- The game requests landscape orientation when supported
 - On high-score name entry, mobile keyboard is supported via hidden input focus
 
-## Files
-
-- `index.html`: full game code (WebGL + UI + input)
-- `data/`: textures and shader files
