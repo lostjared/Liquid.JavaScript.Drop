@@ -16,15 +16,17 @@ canvas { display: block; }
     margin-bottom: 6px;
 }
 
-#touchMoveRow {
+#touchControls #touchMoveRow {
     display: grid;
     grid-template-columns: repeat(3, minmax(62px, 90px));
-    grid-template-areas:
-        "left . right"
-        ". down .";
+    grid-template-areas: "left down right";
     justify-content: center;
     align-items: center;
     gap: 8px;
+}
+
+#touchControls.mobile-device #touchMoveRow {
+    grid-template-areas: "left right down";
 }
 
 #touchMoveRow #btnLeft { grid-area: left; }

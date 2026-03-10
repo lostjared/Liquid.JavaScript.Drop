@@ -813,15 +813,21 @@ requestAnimationFrame(frame);
 const touchControls = document.getElementById("touchControls");
 const touchMenuBar  = document.getElementById("touchMenuBar");
 const isTouchDevice = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
-const isMobileUA = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
+const userAgent = navigator.userAgent;
+const isIPadOS = navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1;
+const isTabletUA = /iPad|Tablet|PlayBook|Silk/i.test(userAgent) ||
+    (/Android/i.test(userAgent) && !/Mobile/i.test(userAgent)) ||
+    isIPadOS;
+const isPhoneUA = /iPhone|iPod|Android.*Mobile|Windows Phone|Mobile/i.test(userAgent) && !isTabletUA;
 
 function isMobileLandscapeTouch() {
     const landscape = window.matchMedia("(orientation: landscape)").matches || window.innerWidth > window.innerHeight;
-    return landscape && (isTouchDevice || isMobileUA);
+    return landscape && isPhoneUA;
 }
 
 function updateTouchControlLayout() {
     touchControls.classList.toggle("mobile-landscape", isMobileLandscapeTouch());
+    touchControls.classList.toggle("mobile-device", isPhoneUA);
 }
 
 function updateTouchUI() {
