@@ -814,7 +814,16 @@ const touchControls = document.getElementById("touchControls");
 const touchMenuBar  = document.getElementById("touchMenuBar");
 const isTouchDevice = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
 
+function isMobileLandscapeTouch() {
+    return isTouchDevice && window.matchMedia("(orientation: landscape)").matches && window.innerHeight <= 900;
+}
+
+function updateTouchControlLayout() {
+    touchControls.classList.toggle("mobile-landscape", isMobileLandscapeTouch());
+}
+
 function updateTouchUI() {
+    updateTouchControlLayout();
     const inGame = currentScreen === SCREEN_GAME;
     const inMenu = [SCREEN_START, SCREEN_OPTIONS, SCREEN_SCORES, SCREEN_GAMEOVER, SCREEN_CREDITS, SCREEN_INTRO].includes(currentScreen);
     touchControls.style.display = inGame ? "block" : "none";
@@ -974,6 +983,7 @@ btnToggle.addEventListener("touchend", handleToggleTouch, { passive: false });
 btnToggle.addEventListener("mouseup", handleToggleTouch);
 const _origFrame = frame;
 frame = function(timestamp) {
+    updateTouchControlLayout();
     if (touchHidden) {
         touchControls.style.display = "none";
         touchMenuBar.style.display = "none";
@@ -1003,4 +1013,7 @@ frame = function(timestamp) {
     }
     _origFrame(timestamp);
 };
+window.addEventListener("resize", updateTouchControlLayout);
+window.addEventListener("orientationchange", updateTouchControlLayout);
+updateTouchControlLayout();
 requestAnimationFrame(frame);
