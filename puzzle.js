@@ -813,9 +813,11 @@ requestAnimationFrame(frame);
 const touchControls = document.getElementById("touchControls");
 const touchMenuBar  = document.getElementById("touchMenuBar");
 const isTouchDevice = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
+const isMobileUA = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
 
 function isMobileLandscapeTouch() {
-    return isTouchDevice && window.matchMedia("(orientation: landscape)").matches && window.innerHeight <= 900;
+    const landscape = window.matchMedia("(orientation: landscape)").matches || window.innerWidth > window.innerHeight;
+    return landscape && (isTouchDevice || isMobileUA);
 }
 
 function updateTouchControlLayout() {
@@ -934,7 +936,7 @@ function bindTap(btnId, code, key) {
     btn.addEventListener("mouseup", handler);
 }
 bindTap("btnRotate",  "Space",    " ");
-bindTap("btnShiftUp", "ArrowUp",  "ArrowUp");
+bindTap("btnSwap",    "ArrowUp",  "ArrowUp");
 bindTap("btnDrop",    "KeyD",     "d");
 bindTap("btnMenuAction", "Enter",     "Enter");
 bindTap("btnMenuUp",     "ArrowUp",   "ArrowUp");
