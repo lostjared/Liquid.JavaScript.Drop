@@ -750,18 +750,18 @@ function loadTexture(path, fallbackR, fallbackG, fallbackB) {
     return tex;
 }
 const blockFiles = [
-    "block_black.png", "block_yellow.png", "block_orange.png", "block_ltblue.png",
-    "block_dblue.png", "block_purple.png", "block_pink.png", "block_gray.png",
-    "block_red.png", "block_green.png", "block_clear.png"
+    "block_black.jpg", "block_yellow.jpg", "block_orange.jpg", "block_ltblue.jpg",
+    "block_dblue.jpg", "block_purple.jpg", "block_pink.jpg", "block_gray.jpg",
+    "block_red.jpg", "block_green.jpg", "block_clear.jpg"
 ];
 const blockTextures = blockFiles.map((f, i) =>
     loadTexture("data/" + f, BLOCK_COLORS[i][0], BLOCK_COLORS[i][1], BLOCK_COLORS[i][2])
 );
-const gameBgTex    = loadTexture("data/gamebg.png",    26, 0, 51);
-const introTex     = loadTexture("data/intro.png",     255, 0, 102);
-const universeTex  = loadTexture("data/universe.png",  34, 0, 68);
-const logoTex      = loadTexture("data/logo.png",      10, 0, 32);
-const scoresBgTex  = loadTexture("data/bg.png",        5, 0, 21);
+const gameBgTex    = loadTexture("data/gamebg.jpg",    26, 0, 51);
+const introTex     = loadTexture("data/intro.jpg",     255, 0, 102);
+const universeTex  = loadTexture("data/universe.jpg",  34, 0, 68);
+const logoTex      = loadTexture("data/logo.jpg",      10, 0, 32);
+const scoresBgTex  = loadTexture("data/bg.jpg",        5, 0, 21);
 const progPassthrough = createProgram("sprite-vs", "sprite-passthrough-fs");
 const progKaleido1 = createProgram("sprite-vs", "kaleidoscope1-fs");
 const progKaleido2 = createProgram("sprite-vs", "kaleidoscope2-fs");
