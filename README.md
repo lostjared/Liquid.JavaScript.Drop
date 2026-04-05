@@ -52,14 +52,14 @@ You control a 3-block piece and try to make matches to clear blocks and score po
 ### Touch / Mouse (mobile + desktop)
 
 - Bottom controls in game:
-	- `◀ ▼ ▶` move
+	- `  ` move
 	- `Rotate` rotates
-	- `↻ Color` shifts color
+	- ` Color` shifts color
 	- `Drop` hard drops
 - Top menu bar:
 	- `OK / Enter` select/continue
-	- `▲` / `▼` navigate menu
-	- On Options screen, `◀` / `▶` appear for changing values
+	- `` / `` navigate menu
+	- On Options screen, `` / `` appear for changing values
 - `Hide Touch` hides overlays; a small floating button restores them
 
 ## High scores
