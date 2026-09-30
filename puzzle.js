@@ -220,7 +220,17 @@ let cursorPos = 0;
 let paused = false;
 let optionsCursor = 0;
 let difficultySetting = 1;
-let shaderEffectsEnabled = true;
+const SHADER_EFFECTS_STORAGE_KEY = "jsDropShaderEffectsEnabled";
+let shaderEffectsEnabled = false;
+try { shaderEffectsEnabled = localStorage.getItem(SHADER_EFFECTS_STORAGE_KEY) === "true"; } catch {}
+
+function toggleShaderEffects() {
+    if (!shaderEffectsEnabled && !window.confirm(
+        "Photosensitivity warning: Intense shader effects include flashing and rapidly moving visuals that may trigger seizures or discomfort. Enable them?"
+    )) return;
+    shaderEffectsEnabled = !shaderEffectsEnabled;
+    try { localStorage.setItem(SHADER_EFFECTS_STORAGE_KEY, String(shaderEffectsEnabled)); } catch {}
+}
 let enteringName = false;
 let playerName = "";
 let finalScore = 0;
@@ -535,6 +545,14 @@ function updateStart(time) {
         drawText(items[i], centerX(items[i]), startY + i * spacing, col);
     }
     drawText(">>", centerX(items[cursorPos]) - scaleYf(30), startY + cursorPos * spacing, "#ffff00");
+    const effectsNotice = [
+        "For the full experience,",
+        "enable Shader Effects in Options",
+        "only if you are not photosensitive."
+    ];
+    effectsNotice.forEach((line, i) =>
+        drawText(line, centerX(line), scaleYf(420) + i * Math.floor(fontSize * 1.4), "#c8c8c8")
+    );
 }
 
 function updateGame(time) {
@@ -720,10 +738,10 @@ document.addEventListener("keydown", (e) => {
         else if (e.code === "ArrowDown") optionsCursor = (optionsCursor + 1) % 3;
         else if (e.code === "ArrowLeft") {
             if (optionsCursor === 0) difficultySetting = (difficultySetting - 1 + 3) % 3;
-            else if (optionsCursor === 1) shaderEffectsEnabled = !shaderEffectsEnabled;
+            else if (optionsCursor === 1) toggleShaderEffects();
         } else if (e.code === "ArrowRight") {
             if (optionsCursor === 0) difficultySetting = (difficultySetting + 1) % 3;
-            else if (optionsCursor === 1) shaderEffectsEnabled = !shaderEffectsEnabled;
+            else if (optionsCursor === 1) toggleShaderEffects();
         } else if (e.code === "Enter") {
             if (optionsCursor === 2) currentScreen = SCREEN_START;
         }
